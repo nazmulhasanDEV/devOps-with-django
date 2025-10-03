@@ -1,0 +1,36 @@
+RUN
+
+Runs at build time (when building the image).
+
+Used to install things, copy, set up environment.
+
+Each RUN creates a new image layer.
+
+Example:
+
+RUN apt-get update && apt-get install -y python3
+
+▶️ CMD
+
+Runs at container start (runtime).
+
+Sets the default command if you don’t provide one.
+
+Can be overridden when you run the container.
+
+Example:
+
+CMD ["python3", "app.py"]   # default command
+
+🎯 ENTRYPOINT
+
+Also runs at container start, but is harder to override.
+
+Treat it as the main executable of the container.
+
+You can still pass arguments (from CMD or docker run).
+
+Example:
+
+ENTRYPOINT ["python3"]
+CMD ["app.py"]   # becomes: python3 app.py
