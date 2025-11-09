@@ -29,10 +29,11 @@ WORKDIR /app_v1
 
 # copying the requirements file before other files so that the requirements file does not run and install all dependencies again if other files change
 COPY ./app/requirements.txt ./app/requirements.txt
-RUN pip install -r ./app/requirements.txt
+RUN --mount=type=cache,target=/root/.cache/pip \
+    pip install --no-cache-dir -r ./app/requirements.txt
 
 COPY . .
 
 WORKDIR /app_v1/app
 
-CMD [ "python3", "manage.py", "runserver", "0.0.0.0:8000" ]
+CMD [ "python3", "-u", "manage.py", "runserver", "0.0.0.0:8000"]
