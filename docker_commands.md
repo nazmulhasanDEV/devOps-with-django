@@ -1,12 +1,19 @@
-# Buld docker file from current director: docker build -t app_name:tag_name . 
+# Buld docker file from current director: 
+        docker build -t image_name:tag_name . 
         ==> Here .(dot) mean where this specified file located
-# Build docker specific docker file: docker build -t app_name:tag_name -f ./v1.Dockerfile . 
+
+# Build docker specific docker file: docker build -t image_name:tag_name -f ./v1.Dockerfile . 
         ==> Here .(dot) mean where this specified file located
+
+# run docker container: docker run --rm -p host_port:container_port image_name:image_tag
+                        ==> docker run --rm -p 8000:8000 image_name:image_tag
 
 # Check files and directories in interactive mode:
-        ===> docker run --rm -it app_name:tag_name sh --> "sh" because, some base images does not support bash. if need bash  need to install and then use. check "Dockerfile"
+        ===> docker run --rm -it image_name:tag_name sh --> "sh" because, some base images does not support bash. if need bash  need to install and then use. check "Dockerfile"
         --> --rm tag ensures that the container will be removed from device when it's stopped and it's all necessary logs will be removed from device and no memory will be used
 
+        ==> docker exec -it container_id bash 
+        if any image support bash
 
 # run requirements file without cache:
         ===> RUN pip install --no-cache-dir -r ./app/requirements.txt --> --no-cache-dir always re-run the requirements.txt file and newly install all dependencies
@@ -62,3 +69,5 @@ docker push nazmulh/myapp:latest
 
 # 6. Test by pulling it
 docker pull nazmulh/myapp:latest
+
+If we want to push latest changes with new version, we have to just change the tag name and push following the similar steps above.
